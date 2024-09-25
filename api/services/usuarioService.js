@@ -25,7 +25,45 @@ class UsuarioService {
 
       return novoUsuario;
     } catch (error) {
-        throw new Error("Erro ao cadastrar usuário.")
+      throw new Error("Erro ao cadastrar usuário.");
+    }
+  }
+  async buscarTodosUsuarios() {
+    const usuarios = await database.usuarios.findAll();
+    return usuarios;
+  }
+  async buscarUsuarioPorId(id) {
+    const usuario = await database.usuarios.findOne({
+      where: {
+        id: id,
+      },
+    });
+    if (!usuario) {
+      throw new Error("Usuario informado não cadastrado!");
+    }
+    return usuario;
+  }
+  async editarUsuario(dto) {
+    const usuario = await this.buscarUsuarioPorId(dto.id);
+    try {
+      usuario.nome = dto.nome;
+      usuario.email = dto.email;
+      await usuario.save();
+      return usuario;
+    } catch (error) {
+      throw new Error("Erro ao editar usuario!");
+    }
+  }
+  async deletarUsuario(id) {
+    await this.buscarUsuarioPorId(id);
+    try {
+      await database.usuarios.destroy({
+        where: {
+          id: id,
+        },
+      });
+    } catch (error) {
+      throw new Error("Erro ao tentar deletar o usuario!");
     }
   }
 }
