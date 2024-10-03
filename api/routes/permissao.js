@@ -1,12 +1,12 @@
 const { Router } = require("express");
-
-const router = new Router();
+const PermissaoController = require("../controllers/permissaoController");
+const router = Router();
 
 router
-  .post("/permissao")
-  .get("/permissao")
-  .get("/permissao/:id")
-  .delete("/permissao/:id")
-  .put("permissao/:id");
+  .post("/permissao", PermissaoController.cadastrar)
+  .get("/permissao", PermissaoController.buscarTodasAsPermissoes)
+  .get("/permissao/:id", PermissaoController.buscarPermissaoPorId)
+  .delete("/permissao/:id", PermissaoController.deletarPermissaoPorId)
+  .put("/permissao/:id", PermissaoController.editarPermissao);
 
 module.exports = router;
