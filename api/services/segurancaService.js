@@ -4,6 +4,9 @@ const Sequelize = require("sequelize");
 class SegurancaService {
   async cadastrarAcl(dto) {
     const usuario = await database.usuarios.findOne({
+      where: {
+        id: dto.usuarioId,
+      },
       include: [
         {
           model: database.roles,
@@ -16,9 +19,6 @@ class SegurancaService {
           attributes: ["id", "nome", "descricao"],
         },
       ],
-      where: {
-        id: dto.usuarioId,
-      },
     });
 
     if (!usuario) {
@@ -48,6 +48,9 @@ class SegurancaService {
     await usuario.addUsuario_permissoes(permissoesCadastradas);
 
     const novoUsuario = await database.usuarios.findOne({
+      where: {
+        id: dto.usuarioId,
+      },
       include: [
         {
           model: database.roles,
