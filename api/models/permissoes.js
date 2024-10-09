@@ -10,12 +10,12 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       permissoes.belongsToMany(models.usuarios, {
         through: models.usuarios_permissoes,
-        as: "permissoes_dos_usuarios",
+        as: "permissao_usuarios",
         foreignKey: "permissao_id",
       });
       permissoes.belongsToMany(models.roles, {
         through: models.roles_permissoes,
-        as: "permissoes_das_roles",
+        as: "permissao_roles",
         foreignKey: "permissao_id",
       });
     }
