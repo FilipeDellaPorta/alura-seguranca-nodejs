@@ -5,6 +5,9 @@ const router = Router();
 
 router
   .post("/seguranca/acl/:usuarioId", SegurancaController.cadastrarAcl)
-  .post("/seguranca/permissoes-roles");
+  .post(
+    "/seguranca/permissoes-roles",
+    SegurancaController.cadastrarPermissoesRoles
+  );
 
 module.exports = router;
