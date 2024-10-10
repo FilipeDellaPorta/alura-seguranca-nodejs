@@ -18,18 +18,6 @@ class SegurancaController {
       res.status(400).send({ message: error.message });
     }
   }
-
-  static async buscarAclporId(req, res) {
-    try {
-      const usuarioId = req.params.id;
-      const usuario = await segurancaService.buscarAclporId(usuarioId);
-      res.status(200).send(usuario);
-    } catch (error) {
-      res
-        .status(500)
-        .send({ message: "Erro ao buscar usuário.", error: error.message });
-    }
-  }
 }
 
 module.exports = SegurancaController;

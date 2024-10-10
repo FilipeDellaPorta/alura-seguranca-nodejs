@@ -67,24 +67,6 @@ class SegurancaService {
 
     return novoUsuario;
   }
-
-  async buscarAclporId(usuarioId) {
-    return await database.usuarios.findOne({
-      where: { id: usuarioId },
-      include: [
-        {
-          model: database.roles,
-          as: "usuario_roles",
-          attributes: ["id", "nome", "descricao"],
-        },
-        {
-          model: database.permissoes,
-          as: "usuario_permissoes",
-          attributes: ["id", "nome", "descricao"],
-        },
-      ],
-    });
-  }
 }
 
 module.exports = SegurancaService;
