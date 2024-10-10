@@ -21,9 +21,9 @@ const roles = (listaRoles) => {
       return res.status(401).send("Usuário não cadastrado!");
     }
 
-    const rolesCadastradas = usuario.usuarios_roles
+    const rolesCadastradas = usuario.usuario_roles
       .map((role) => role.nome)
-      .same((role) => listaRoles.includes(role));
+      .some((role) => listaRoles.includes(role));
 
     if (!rolesCadastradas) {
       return res.status(401).send("Usuário não possui acesso a esta rota!");
@@ -33,4 +33,4 @@ const roles = (listaRoles) => {
   };
 };
 
-module.exports = roles
+module.exports = roles;
